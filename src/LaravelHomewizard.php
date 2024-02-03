@@ -16,33 +16,35 @@ class LaravelHomewizard
 
     public function __construct(private readonly string $ipAddress)
     {
-        $this->url = 'http://' . $this->ipAddress . '/api/v1/data';
+        $this->url = 'http://'.$this->ipAddress.'/api/v1/data';
         $this->client = new Client();
         $this->data = $this->getData();
     }
 
     /**
      * @return array<string, mixed>|false
+     *
      * @throws GuzzleException
      */
     public function getData()
     {
-       return Cache::remember('homewizard_data', 1, function(){
-                /** @var Response $reponse */
-            $response =  $this->client->get($this->url);
+        return Cache::remember('homewizard_data', 1, function () {
+            /** @var Response $reponse */
+            $response = $this->client->get($this->url);
+
             return json_decode($response->getBody(), true);
         });
     }
 
     /**
      * @return ?string
+     *
      * @throws GuzzleException
      */
-        public function getWifiSsid(): ?string
-        {
-           return Arr::get($this->data, 'wifi_ssid');
-        }
-
+    public function getWifiSsid(): ?string
+    {
+        return Arr::get($this->data, 'wifi_ssid');
+    }
 
     /**
      * @return ?int
@@ -220,9 +222,6 @@ class LaravelHomewizard
         return Arr::get($this->data, 'gas_unique_id');
     }
 
-    /**
-     * @return array|null
-     */
     public function getExternal(): ?array
     {
         return Arr::get($this->data, 'external');
