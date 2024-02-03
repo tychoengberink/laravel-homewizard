@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace TychoEngberink\LaravelHomewizard\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelHomewizardCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-homewizard';
 
     public $description = 'My command';
 
